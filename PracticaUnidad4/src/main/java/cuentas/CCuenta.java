@@ -1,77 +1,80 @@
 package cuentas;
-
 /**
  *
  * @author Hafsa
  */
 
+
+/**
+ * Clase que representa una cuenta bancaria.
+ * Permite ingresar y retirar dinero, además de consultar el saldo.
+ */
 public class CCuenta {
+
+    /** Nombre del titular de la cuenta */
     private String nombre;
+
+    /** Número de cuenta bancaria */
     private String cuenta;
+
+    /** Saldo disponible en la cuenta */
     private double saldo;
+
+    /** Tipo de interés asociado a la cuenta */
     private double tipoInterés;
 
-    public CCuenta() {
-    }
+    /**
+     * Constructor vacío de CCuenta.
+     */
+    public CCuenta() { }
 
+    /**
+     * Constructor con parámetros.
+     * 
+     * @param nom Nombre del titular de la cuenta.
+     * @param cue Número de cuenta bancaria.
+     * @param sal Saldo inicial de la cuenta.
+     * @param tipo Tipo de interés de la cuenta.
+     */
     public CCuenta(String nom, String cue, double sal, double tipo) {
-        this.nombre = nom;
-        this.cuenta = cue;
-        this.saldo = sal;
-        this.tipoInterés = tipo;
+        nombre = nom;
+        cuenta = cue;
+        saldo = sal;
+        tipoInterés = tipo;
     }
 
+    /**
+     * Devuelve el saldo actual de la cuenta.
+     * 
+     * @return Saldo disponible.
+     */
     public double estado() {
         return saldo;
     }
 
+    /**
+     * Ingresa una cantidad en la cuenta.
+     * 
+     * @param cantidad Cantidad a ingresar.
+     * @throws Exception Si la cantidad es negativa.
+     */
     public void ingresar(double cantidad) throws Exception {
-        if (cantidad < 0) {
+        if (cantidad < 0)
             throw new Exception("No se puede ingresar una cantidad negativa");
-        }
-        saldo += cantidad;
+        saldo = saldo + cantidad;
     }
 
+    /**
+     * Retira una cantidad de la cuenta.
+     * 
+     * @param cantidad Cantidad a retirar.
+     * @throws Exception Si la cantidad es negativa o no hay suficiente saldo.
+     */
     public void retirar(double cantidad) throws Exception {
-        if (cantidad <= 0) {
+        if (cantidad <= 0)
             throw new Exception("No se puede retirar una cantidad negativa");
-        }
-        if (estado() < cantidad) {
+        if (estado() < cantidad)
             throw new Exception("No hay suficiente saldo");
-        }
-        saldo -= cantidad;
-    }
-
-    // Métodos Getters y Setters
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(String cuenta) {
-        this.cuenta = cuenta;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
-    public double getTipoInteres() {
-        return tipoInterés;
-    }
-
-    public void setTipoInteres(double tipoInterés) {
-        this.tipoInterés = tipoInterés;
+        saldo = saldo - cantidad;
     }
 }
